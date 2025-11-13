@@ -1,0 +1,171 @@
+body{
+  margin: 0;
+  background-color: #c7e6c9;
+}
+header{
+ background-color: rgb(7, 72, 5);
+ color: white;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  height: 15vh;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: 0 1px 5px 0.5px rgb(127, 125, 125) ;
+  gap: 11px;
+  /* position: sticky;
+  top: 0; */
+}
+header >section{
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  cursor: pointer;
+}
+header >section> h2{
+  margin-top: 1px;
+  margin-bottom: 2px;
+ 
+}
+header > section> img{
+  width: 50px;
+  border-radius: 50%;
+}
+form{
+  display: flex;
+   /*justify-content: center;
+  align-items: center; */
+  gap: 20px;
+}
+form > input{
+  border-radius: 6px;
+  border: 1px solid;
+}
+.formcontainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  width: 60%;
+  border-radius: 10px;
+  box-shadow: 1px 2px 4px rgb(184, 177, 177);
+  /* flex-grow: 1; */
+}
+main{
+  display: flex;
+  flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 30px;
+}
+.formcontainer > form{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-width: 60%;
+}
+.formcontainer > form > input{
+  width: 100%;
+  height: 35px;
+  border: none;
+  background-color: #e3e7ea;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: larger;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+}
+.formcontainer > form > input:hover{
+  box-shadow: 0 0 5px black;
+}
+.formcontainer > form > input:focus{
+  box-shadow: 0 0 10px black;
+  border: none;
+}
+.formcontainer > form > button{
+  border: none;
+  background-color: #646567;
+  font-size: x-small;
+  font-weight: 700;
+  padding: 7px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.formcontainer > form > button:hover{
+  background-color: black;
+}
+
+.formcontainer > form > button:active{
+  transform: scale(0.95);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+.listContainer{
+   display: flex;
+  box-shadow: 1px 2px 4px rgb(184, 177, 177);
+  align-items: center;
+  background-color: white;
+  width: 95%;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+.IngredientLists > li {
+  font-size: x-large;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.recipeContainer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(7, 72, 5);
+  align-items: flex-start;
+  padding: 20px;
+  width: 80%;
+  border-radius: 10px;
+  color: white;
+}
+.recipeContainer > button{
+  height: 45px;
+  margin-left: auto;
+  align-self: center;
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  border-radius: 6px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.recipeContainer > button:hover{
+  background-color: rgb(156, 9, 9);
+}
+.recipeContainer > button:active{
+   transform: scale(0.95);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+header >p{
+  position: absolute;
+  right: 10px;
+  margin-left: auto;
+  align-self: center;
+  cursor: pointer;
+}
+li>button{
+  border: none;
+  background-color: red;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  transition: display 0.4 ease;
+}
+   li:hover button{
+ display: inline-block;
+} 
