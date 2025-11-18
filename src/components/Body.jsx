@@ -97,7 +97,7 @@ function RemoveItem(index){
 
 {recipe && (
   <div response className="recipeResponse">
-    <h2>Here Are Some Suggested Secipe from your List Of Ingredients</h2>
+    <h2>Here Are Some Suggested Recipe from your List Of Ingredients</h2>
   <div dangerouslySetInnerHTML={{ __html: recipe }}></div>
   </div>
 )}
