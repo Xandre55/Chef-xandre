@@ -8,6 +8,12 @@ const [loading, setLoading] = React.useState(false);
 const [error, seterror] = React.useState(null);
     const [ingredients, setingredients] = React.useState([])
 
+    function cleanRecipe(raw) {
+  // Remove ```html at start and ``` at end
+  return raw.replace(/^```html\s*/i, "").replace(/```$/, "").trim();
+}
+
+
 const IngredientList = ingredients.map((ingredient,index) => 
 <li  key= {index} >
     {ingredient.toUpperCase()}<button onClick={() => RemoveItem(index)}><FontAwesomeIcon icon={faTrash}/></button></li>)
@@ -27,9 +33,9 @@ const IngredientList = ingredients.map((ingredient,index) =>
     throw new Error (errorData.error || "failed to fetch recipes");
   }
 
-  const recipetext = await response.text();
-  console.log(recipetext); // array of recipes
-  return recipetext;
+   const rawText = await response.text();
+    const cleaned = cleanRecipe(rawText);
+    return cleaned;
 }catch (error){
   console.error("Error fetching recipes:", error);
   throw error;
