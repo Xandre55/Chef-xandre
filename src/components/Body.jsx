@@ -5,7 +5,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 export default function Body(){
 const [recipe, setRecipe] = React.useState("");
 const [loading, setLoading] = React.useState(false);
-
+const [error, seterror] = React.useState(null);
     const [ingredients, setingredients] = React.useState([])
 
 const IngredientList = ingredients.map((ingredient,index) => 
@@ -13,15 +13,27 @@ const IngredientList = ingredients.map((ingredient,index) =>
     {ingredient.toUpperCase()}<button onClick={() => RemoveItem(index)}><FontAwesomeIcon icon={faTrash}/></button></li>)
 
    async function fetchRecipes(ingredients) {
-  const response = await fetch("http://localhost:3000/recipes", {
+  try{ 
+    const response = await fetch("https://chef-backend-production.up.railway.app/recipes", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ingredients })
-  });
 
-  const recipes = await response.json();
-  console.log(recipes); // array of recipes
-  return recipes;
+  })
+  
+
+  if(!response.ok){
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error (errorData.error || "failed to fetch recipes");
+  }
+
+  const recipetext = await response.text();
+  console.log(recipetext); // array of recipes
+  return recipetext;
+}catch (error){
+  console.error("Error fetching recipes:", error);
+  throw error;
+}
 }
 
 // Call example
@@ -63,15 +75,27 @@ function RemoveItem(index){
            { IngredientList.length > 3 && <div className="recipeContainer">
                     <h3>Ready for some Recipe?</h3>
                     <p>Generate Recipe from your list of ingredients</p>
-                    <button onClick={fetchRecipes}>{ loading ? "loading" : "Get a recipe" }</button>
+                    <button 
+                     onClick={ async() => {
+              setLoading(true);
+              seterror(null);
+              try{
+                const recipetext = await fetchRecipes(ingredients);
+                setRecipe(recipetext);
+              }
+                catch (error){seterror(error.message) || "failed fetcing ";}
+              setLoading(false);
+            }}
+                    >{ loading ? "loading" : "Get a recipe" }</button>
             </div>}
 
 {recipe && (
-  <div>
-    <h2>Your Recipe</h2>
-    <p>{recipe}</p>
+  <div response className="recipeResponse">
+    <h2>Here Are Some Suggested Secipe from your List Of Ingredients</h2>
+  <div dangerouslySetInnerHTML={{ __html: recipe }}></div>
   </div>
 )}
+{error && <div style={{color: "red"}}>{error}</div>}
         </main>
     )
 }
